@@ -1,0 +1,14 @@
+---
+description: Replace legacy branding with market automation
+globs: **/*.{js,jsx,ts,tsx,py,md,json,html,css,txt,yml,yaml,env}
+alwaysApply: true
+---
+
+# Branding replacement
+
+- If the legacy branding phrase appears anywhere in the open file (case-insensitive), replace it with `market otomasyonu`.
+- Preserve capitalization for the first letter:
+  - `Market otomasyonu`
+  - `market otomasyonu`
+- In your response, do not mention or emphasize the legacy phrase; just say the branding phrase was replaced.
+
