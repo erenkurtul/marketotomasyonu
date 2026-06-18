@@ -14,6 +14,7 @@ const emptyForm = {
 
 const Customers = () => {
   const [customers, setCustomers] = useState([]);
+  const [showInactive, setShowInactive] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [editingCustomer, setEditingCustomer] = useState(null);
   const [formData, setFormData] = useState(emptyForm);
@@ -75,11 +76,24 @@ const Customers = () => {
     }
   };
 
+  const visibleCustomers = showInactive
+    ? customers
+    : customers.filter((customer) => customer.isActive !== false);
+
   return (
     <div data-testid="customers-page">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Musteri Yonetimi</h1>
-        <button
+        <div className="flex items-center gap-4">
+          <label className="flex items-center gap-2 text-sm text-gray-600">
+            <input
+              type="checkbox"
+              checked={showInactive}
+              onChange={(e) => setShowInactive(e.target.checked)}
+            />
+            Pasif musterileri goster
+          </label>
+          <button
           onClick={() => {
             setEditingCustomer(null);
             setFormData(emptyForm);
@@ -89,6 +103,7 @@ const Customers = () => {
         >
           + Yeni Musteri
         </button>
+        </div>
       </div>
 
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
@@ -100,17 +115,30 @@ const Customers = () => {
               <th className="px-4 py-3 text-left">Email</th>
               <th className="px-4 py-3 text-left">Toplam Alisveris</th>
               <th className="px-4 py-3 text-left">Borc</th>
+              <th className="px-4 py-3 text-left">Durum</th>
               <th className="px-4 py-3 text-center">Islemler</th>
             </tr>
           </thead>
           <tbody className="divide-y">
-            {customers.map((customer) => (
+            {visibleCustomers.length === 0 ? (
+              <tr>
+                <td colSpan={7} className="px-4 py-8 text-center text-gray-500">
+                  Aktif musteri bulunamadi.
+                </td>
+              </tr>
+            ) : (
+              visibleCustomers.map((customer) => (
               <tr key={customer.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3">{customer.fullName}</td>
                 <td className="px-4 py-3">{customer.phone || '-'}</td>
                 <td className="px-4 py-3">{customer.email || '-'}</td>
                 <td className="px-4 py-3">{customer.totalPurchases ?? 0}</td>
                 <td className="px-4 py-3">₺{(customer.totalDebt ?? 0).toFixed(2)}</td>
+                <td className="px-4 py-3">
+                  <span className={customer.isActive !== false ? 'text-green-600 font-medium' : 'text-gray-400'}>
+                    {customer.isActive !== false ? 'Aktif' : 'Pasif'}
+                  </span>
+                </td>
                 <td className="px-4 py-3 text-center">
                   <button onClick={() => handleEdit(customer)} className="text-blue-600 hover:text-blue-800 mr-3">
                     Duzenle
@@ -120,7 +148,8 @@ const Customers = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))
+            )}
           </tbody>
         </table>
       </div>
@@ -160,6 +189,14 @@ const Customers = () => {
                   onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                   className="w-full px-3 py-2 border rounded"
                 />
+                <label className="flex items-center gap-2 col-span-2">
+                  <input
+                    type="checkbox"
+                    checked={formData.isActive}
+                    onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                  />
+                  Aktif musteri
+                </label>
               </div>
               <div className="flex gap-3 justify-end pt-4">
                 <button

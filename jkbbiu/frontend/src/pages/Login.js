@@ -79,7 +79,8 @@ const Login = () => {
           </button>
         </form>
 
-        <div className="mt-6 text-center text-sm text-gray-600">
+        <div className="mt-6 text-center text-sm text-gray-600 space-y-1">
+          <p>Uygulamayı açmak için: <span className="font-semibold">http://localhost:3000</span></p>
           <p>Demo Kullanıcı: <span className="font-semibold">admin</span></p>
           <p>Şifre: <span className="font-semibold">Admin123!</span></p>
         </div>

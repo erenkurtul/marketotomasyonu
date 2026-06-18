@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "69f262456f426de13c7ea8ca",
+    "Name": "Icecekler",
+    "Description": "Soguk ve sicak icecekler",
+    "ParentCategoryId": null,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:49.132Z"
+  },
+  {
+    "_id": "69f262456f426de13c7ea8cc",
+    "Name": "Temizlik",
+    "Description": "Temizlik ve hijyen urunleri",
+    "ParentCategoryId": null,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:49.132Z"
+  },
+  {
+    "_id": "69f262456f426de13c7ea8cb",
+    "Name": "Gida",
+    "Description": "Temel gida urunleri",
+    "ParentCategoryId": null,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:49.132Z"
+  }
+]

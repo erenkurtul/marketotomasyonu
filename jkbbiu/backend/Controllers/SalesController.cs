@@ -30,7 +30,7 @@ namespace backend.Controllers
             // Tüm ürünleri tek sorguda çek (N+1 query problemi önlemi)
             var productIds = dto.Items.Select(i => i.ProductId).ToList();
             var products = await _mongoDb.Products
-                .Find(p => productIds.Contains(p.Id))
+                .Find(p => p.Id != null && productIds.Contains(p.Id))
                 .ToListAsync();
             
             var productDict = products.ToDictionary(p => p.Id!);

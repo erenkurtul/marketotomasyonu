@@ -19,10 +19,14 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] bool activeOnly = false)
         {
+            var filter = activeOnly
+                ? Builders<Customer>.Filter.Eq(c => c.IsActive, true)
+                : Builders<Customer>.Filter.Empty;
+
             var customers = await _mongoDb.Customers
-                .Find(_ => true)
+                .Find(filter)
                 .Limit(1000)
                 .ToListAsync();
             return Ok(customers);

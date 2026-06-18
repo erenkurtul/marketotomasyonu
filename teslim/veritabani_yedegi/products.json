@@ -1,0 +1,186 @@
+[
+  {
+    "_id": "69f262456f426de13c7ea8ce",
+    "Name": "Ekmek",
+    "Description": "Gunluk taze ekmek",
+    "Barcode": "1111111111111",
+    "CategoryId": "69f262456f426de13c7ea8cb",
+    "PurchasePrice": {
+      "$numberDecimal": "2.50"
+    },
+    "SalePrice": {
+      "$numberDecimal": "5.00"
+    },
+    "TaxRate": {
+      "$numberDecimal": "8"
+    },
+    "StockQuantity": 48,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:49.549Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "69f262456f426de13c7ea8cf",
+    "Name": "Deterjan",
+    "Description": "Cok amacli temizlik urunu",
+    "Barcode": "3333333333333",
+    "CategoryId": "69f262456f426de13c7ea8cc",
+    "PurchasePrice": {
+      "$numberDecimal": "45.00"
+    },
+    "SalePrice": {
+      "$numberDecimal": "75.00"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 21,
+    "MinimumStockLevel": 5,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:49.549Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "69f262456f426de13c7ea8cd",
+    "Name": "Coca Cola 330ml",
+    "Description": "Kutu icecek",
+    "Barcode": "8690504000019",
+    "CategoryId": "69f262456f426de13c7ea8ca",
+    "PurchasePrice": {
+      "$numberDecimal": "8.50"
+    },
+    "SalePrice": {
+      "$numberDecimal": "15.00"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 100,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:49.549Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "6a339e297f645c38b00b62e8",
+    "Name": "cips",
+    "Description": "",
+    "Barcode": "258369",
+    "CategoryId": "69f262456f426de13c7ea8cb",
+    "PurchasePrice": {
+      "$numberDecimal": "5"
+    },
+    "SalePrice": {
+      "$numberDecimal": "10"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 99,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-06-18T07:28:41.580Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "6a339e437f645c38b00b62e9",
+    "Name": "makarna ",
+    "Description": "",
+    "Barcode": "147258",
+    "CategoryId": "69f262456f426de13c7ea8cb",
+    "PurchasePrice": {
+      "$numberDecimal": "20"
+    },
+    "SalePrice": {
+      "$numberDecimal": "30"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 200,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-06-18T07:29:07.586Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "6a339e5f7f645c38b00b62ea",
+    "Name": "Bulgur",
+    "Description": "",
+    "Barcode": "123654",
+    "CategoryId": "69f262456f426de13c7ea8cb",
+    "PurchasePrice": {
+      "$numberDecimal": "25"
+    },
+    "SalePrice": {
+      "$numberDecimal": "33"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 50,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-06-18T07:29:35.521Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "6a339e877f645c38b00b62eb",
+    "Name": "Domestos",
+    "Description": "",
+    "Barcode": "369123",
+    "CategoryId": "69f262456f426de13c7ea8cc",
+    "PurchasePrice": {
+      "$numberDecimal": "10"
+    },
+    "SalePrice": {
+      "$numberDecimal": "22"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 20,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-06-18T07:30:15.264Z",
+    "UpdatedAt": null
+  },
+  {
+    "_id": "6a33c4061a3397aa0704a306",
+    "Name": "hırka",
+    "Description": "",
+    "Barcode": "741258",
+    "CategoryId": "69f262456f426de13c7ea8ca",
+    "PurchasePrice": {
+      "$numberDecimal": "20"
+    },
+    "SalePrice": {
+      "$numberDecimal": "30"
+    },
+    "TaxRate": {
+      "$numberDecimal": "18"
+    },
+    "StockQuantity": 77,
+    "MinimumStockLevel": 10,
+    "Unit": "Adet",
+    "ImageUrl": null,
+    "IsActive": true,
+    "CreatedAt": "2026-06-18T10:10:14.184Z",
+    "UpdatedAt": null
+  }
+]

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const AuthContext = createContext(null);
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -11,9 +11,15 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    try {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+        setUser(JSON.parse(storedUser));
+      }
+    } catch {
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      setToken(null);
     }
     setLoading(false);
   }, []);
@@ -32,10 +38,15 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('user', JSON.stringify(user));
       return { success: true };
     } catch (error) {
-      return { 
-        success: false, 
-        message: error.response?.data?.message || 'Giriş başarısız' 
-      };
+      const status = error.response?.status;
+      const serverMessage = error.response?.data?.message;
+      let message = serverMessage || 'Giriş başarısız';
+      if (status === 503) {
+        message = serverMessage || 'Veritabanına bağlanılamıyor. MongoDB Atlas IP iznini kontrol edin.';
+      } else if (!error.response) {
+        message = 'Sunucuya ulaşılamıyor. Backend (port 8001) çalışıyor mu kontrol edin.';
+      }
+      return { success: false, message };
     }
   };
 

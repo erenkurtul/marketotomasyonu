@@ -55,6 +55,7 @@ C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\backend.r
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\backend.dll
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\backend.pdb
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\Bogus.dll
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\DnsClient.dll
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\Microsoft.AspNetCore.OpenApi.dll
@@ -98,4 +99,3 @@ C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\obj\Debug\net8.0\refint\ba
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\obj\Debug\net8.0\backend.pdb
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\obj\Debug\net8.0\backend.genruntimeconfig.cache
 C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\obj\Debug\net8.0\ref\backend.dll
-C:\Users\Eren\Desktop\marketotomasyonu\jkbbiu\backend\bin\Debug\net8.0\Bogus.dll

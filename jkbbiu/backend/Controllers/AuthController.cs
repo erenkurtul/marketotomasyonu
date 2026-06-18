@@ -64,7 +64,18 @@ namespace backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = await _mongoDb.Users.Find(u => u.Username == dto.Username).FirstOrDefaultAsync();
+            User? user;
+            try
+            {
+                user = await _mongoDb.Users.Find(u => u.Username == dto.Username).FirstOrDefaultAsync();
+            }
+            catch (Exception)
+            {
+                return StatusCode(503, new
+                {
+                    message = "Veritabanına bağlanılamıyor. MongoDB Atlas → Network Access bölümünde IP adresinizi (veya 0.0.0.0/0) ekleyin."
+                });
+            }
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             {
                 return Unauthorized(new { message = "Kullanıcı adı veya şifre hatalı." });

@@ -1,0 +1,36 @@
+[
+  {
+    "_id": "69f263d16f426de13c7ea8d0",
+    "FullName": "rwıogw4hı",
+    "Phone": "2556655",
+    "Email": "sevketerenkurtul1@gmail.com",
+    "Address": "gwe",
+    "LoyaltyPoints": {
+      "$numberDecimal": "37"
+    },
+    "TotalDebt": {
+      "$numberDecimal": "0"
+    },
+    "TotalPurchases": 1,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T20:02:25.151Z",
+    "LastPurchaseDate": "2026-06-18T07:32:17.822Z"
+  },
+  {
+    "_id": "69f263d16f426de13c7ea8d1",
+    "FullName": "rwıogw4hı",
+    "Phone": "2556655",
+    "Email": "sevketerenkurtul1@gmail.com",
+    "Address": "gwe",
+    "LoyaltyPoints": {
+      "$numberDecimal": "0"
+    },
+    "TotalDebt": {
+      "$numberDecimal": "0"
+    },
+    "TotalPurchases": 0,
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T20:02:25.596Z",
+    "LastPurchaseDate": null
+  }
+]

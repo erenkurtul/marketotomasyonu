@@ -1,6 +1,21 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8001';
+
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const isLoginRequest = error.config?.url?.includes('/api/auth/login');
+    if (error.response?.status === 401 && !isLoginRequest) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
 
 const getAuthHeader = () => {
   const token = localStorage.getItem('token');
@@ -8,8 +23,11 @@ const getAuthHeader = () => {
 };
 
 // Products
-export const getProducts = () => 
-  axios.get(`${API_URL}/api/products`, { headers: getAuthHeader() });
+export const getProducts = (activeOnly = false) => 
+  axios.get(`${API_URL}/api/products`, { 
+    headers: getAuthHeader(),
+    params: activeOnly ? { activeOnly: true } : {}
+  });
 
 export const getProductByBarcode = (barcode) => 
   axios.get(`${API_URL}/api/products/barcode/${barcode}`, { headers: getAuthHeader() });
@@ -62,8 +80,11 @@ export const getDailySummary = (date) =>
   });
 
 // Customers
-export const getCustomers = () => 
-  axios.get(`${API_URL}/api/customers`, { headers: getAuthHeader() });
+export const getCustomers = (activeOnly = false) => 
+  axios.get(`${API_URL}/api/customers`, { 
+    headers: getAuthHeader(),
+    params: activeOnly ? { activeOnly: true } : {}
+  });
 
 export const createCustomer = (data) => 
   axios.post(`${API_URL}/api/customers`, data, { headers: getAuthHeader() });

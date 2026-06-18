@@ -1,0 +1,26 @@
+[
+  {
+    "_id": "69f262436f426de13c7ea8c9",
+    "Username": "admin",
+    "Email": "admin@market.local",
+    "PasswordHash": "$2a$11$Orf2qGGd88Qw58qsJvixuehSRHfKCfCO/6/usyDehyxTxhqjUNl4e",
+    "Role": 0,
+    "FullName": "Sistem Yonetici",
+    "Phone": "",
+    "IsActive": true,
+    "CreatedAt": "2026-04-29T19:55:47.870Z",
+    "LastLogin": "2026-06-18T10:16:20.158Z"
+  },
+  {
+    "_id": "69f26567e44e656621fee9a6",
+    "username": "admin",
+    "email": "admin@market.local",
+    "passwordHash": "$2a$11$93s0Rh7b/lELVcgKs6gA4OLZfkAPvVFqqSNlBPXOH6.kT2mVbhdU2",
+    "role": 0,
+    "fullName": "Sistem Yonetici",
+    "phone": "",
+    "isActive": true,
+    "createdAt": "2026-04-29T20:09:11.659Z",
+    "lastLogin": "2026-06-17T20:49:47.688Z"
+  }
+]

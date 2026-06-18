@@ -1,0 +1,12 @@
+{
+  "name": "marketotomasyonu",
+  "private": true,
+  "scripts": {
+    "start:all": "powershell -ExecutionPolicy Bypass -File ./start.ps1",
+    "dev": "npm.cmd run start:all",
+    "dev:frontend": "npm.cmd --prefix jkbbiu/frontend run dev",
+    "dev:backend": "dotnet run --project jkbbiu/backend",
+    "build": "npm.cmd --prefix jkbbiu run build",
+    "start": "npm.cmd --prefix jkbbiu run start"
+  }
+}

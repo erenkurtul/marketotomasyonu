@@ -11,13 +11,13 @@ import Layout from './components/Layout';
 import './App.css';
 
 const PrivateRoute = ({ children }) => {
-  const { user, loading } = useAuth();
+  const { user, token, loading } = useAuth();
   
   if (loading) {
     return <div className="flex items-center justify-center h-screen">Yükleniyor...</div>;
   }
   
-  return user ? children : <Navigate to="/login" />;
+  return user && token ? children : <Navigate to="/login" replace />;
 };
 
 function AppRoutes() {

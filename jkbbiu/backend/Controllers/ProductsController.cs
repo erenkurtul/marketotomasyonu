@@ -20,10 +20,10 @@ namespace backend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] bool activeOnly = false)
         {
             var products = await _mongoDb.Products
-                .Find(_ => true)
+                .Find(Builders<Product>.Filter.Empty)
                 .Limit(1000)
                 .ToListAsync();
             return Ok(products);

@@ -4,6 +4,8 @@ import { getProducts, createProduct, updateProduct, deleteProduct, getCategories
 const Products = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [formData, setFormData] = useState({
@@ -25,11 +27,16 @@ const Products = () => {
   }, []);
 
   const loadProducts = async () => {
+    setLoading(true);
+    setError('');
     try {
       const response = await getProducts();
       setProducts(response.data);
-    } catch (error) {
-      console.error('Ürünler yüklenemedi:', error);
+    } catch (err) {
+      console.error('Ürünler yüklenemedi:', err);
+      setError(err.response?.data?.message || 'Ürünler yüklenemedi. Önce giriş yapın ve backend\'in çalıştığından emin olun.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -115,6 +122,15 @@ const Products = () => {
         </button>
       </div>
 
+      {error && (
+        <div className="mb-4 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded-lg">
+          {error}
+        </div>
+      )}
+
+      {loading ? (
+        <div className="text-center py-12 text-gray-600">Ürünler veritabanından yükleniyor...</div>
+      ) : (
       <div className="bg-white rounded-lg shadow-lg overflow-hidden">
         <table className="w-full">
           <thead className="bg-gray-100">
@@ -128,7 +144,14 @@ const Products = () => {
             </tr>
           </thead>
           <tbody className="divide-y">
-            {products.map(product => (
+            {products.length === 0 ? (
+              <tr>
+                <td colSpan={6} className="px-4 py-8 text-center text-gray-500">
+                  Veritabaninda urun bulunamadi.
+                </td>
+              </tr>
+            ) : (
+            products.map(product => (
               <tr key={product.id} className="hover:bg-gray-50">
                 <td className="px-4 py-3">{product.name}</td>
                 <td className="px-4 py-3">{product.barcode}</td>
@@ -156,10 +179,12 @@ const Products = () => {
                   </button>
                 </td>
               </tr>
-            ))}
+            ))
+            )}
           </tbody>
         </table>
       </div>
+      )}
 
       {/* Modal */}
       {showModal && (

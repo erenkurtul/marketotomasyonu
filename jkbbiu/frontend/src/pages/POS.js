@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { getProductByBarcode, createSale, getCustomers } from '../services/api';
-import { useAuth } from '../context/AuthContext';
+import { getProductByBarcode, getProducts, createSale, getCustomers } from '../services/api';
 
 const POS = () => {
   const [cart, setCart] = useState([]);
   const [barcode, setBarcode] = useState('');
+  const [products, setProducts] = useState([]);
+  const [productSearch, setProductSearch] = useState('');
   const [customers, setCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState(0); // 0: Cash, 1: CreditCard
+  const [paymentMethod, setPaymentMethod] = useState(0);
   const [paidAmount, setPaidAmount] = useState('');
   const [discount, setDiscount] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -15,16 +16,62 @@ const POS = () => {
   const barcodeRef = useRef(null);
 
   useEffect(() => {
+    loadProducts();
     loadCustomers();
   }, []);
 
+  const loadProducts = async () => {
+    try {
+      const response = await getProducts(true);
+      setProducts(response.data);
+    } catch (error) {
+      console.error('Ürünler yüklenemedi:', error);
+    }
+  };
+
   const loadCustomers = async () => {
     try {
-      const response = await getCustomers();
+      const response = await getCustomers(true);
       setCustomers(response.data);
     } catch (error) {
       console.error('Müşteriler yüklenemedi:', error);
     }
+  };
+
+  const addProductToCart = (product) => {
+    if (product.stockQuantity <= 0) {
+      setMessage({ type: 'error', text: `${product.name} stokta yok!` });
+      setTimeout(() => setMessage({ type: '', text: '' }), 3000);
+      return;
+    }
+
+    const existingItem = cart.find(item => item.productId === product.id);
+
+    if (existingItem) {
+      if (existingItem.quantity >= product.stockQuantity) {
+        setMessage({ type: 'error', text: `${product.name} için yeterli stok yok!` });
+        setTimeout(() => setMessage({ type: '', text: '' }), 3000);
+        return;
+      }
+      setCart(cart.map(item =>
+        item.productId === product.id
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      ));
+    } else {
+      setCart([...cart, {
+        productId: product.id,
+        name: product.name,
+        barcode: product.barcode,
+        price: product.salePrice,
+        taxRate: product.taxRate,
+        quantity: 1,
+        maxStock: product.stockQuantity
+      }]);
+    }
+
+    setMessage({ type: 'success', text: `${product.name} sepete eklendi!` });
+    setTimeout(() => setMessage({ type: '', text: '' }), 3000);
   };
 
   const handleBarcodeSubmit = async (e) => {
@@ -33,44 +80,27 @@ const POS = () => {
 
     try {
       const response = await getProductByBarcode(barcode);
-      const product = response.data;
-
-      // Sepette var mı kontrol et
-      const existingItem = cart.find(item => item.productId === product.id);
-      
-      if (existingItem) {
-        setCart(cart.map(item => 
-          item.productId === product.id 
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        ));
-      } else {
-        setCart([...cart, {
-          productId: product.id,
-          name: product.name,
-          barcode: product.barcode,
-          price: product.salePrice,
-          taxRate: product.taxRate,
-          quantity: 1
-        }]);
-      }
-
-      setMessage({ type: 'success', text: `${product.name} sepete eklendi!` });
+      addProductToCart(response.data);
       setBarcode('');
     } catch (error) {
       setMessage({ type: 'error', text: 'Ürün bulunamadı!' });
       setBarcode('');
+      setTimeout(() => setMessage({ type: '', text: '' }), 3000);
     }
-
-    setTimeout(() => setMessage({ type: '', text: '' }), 3000);
   };
 
   const updateQuantity = (productId, newQuantity) => {
     if (newQuantity <= 0) {
       removeFromCart(productId);
     } else {
-      setCart(cart.map(item => 
-        item.productId === productId 
+      const item = cart.find(i => i.productId === productId);
+      if (item?.maxStock && newQuantity > item.maxStock) {
+        setMessage({ type: 'error', text: 'Yeterli stok yok!' });
+        setTimeout(() => setMessage({ type: '', text: '' }), 3000);
+        return;
+      }
+      setCart(cart.map(item =>
+        item.productId === productId
           ? { ...item, quantity: newQuantity }
           : item
       ));
@@ -131,6 +161,7 @@ const POS = () => {
       setSelectedCustomer('');
       setPaidAmount('');
       setDiscount(0);
+      loadProducts();
       
       setTimeout(() => setMessage({ type: '', text: '' }), 5000);
     } catch (error) {
@@ -145,6 +176,15 @@ const POS = () => {
 
   const { subtotal, tax, total } = calculateTotals();
   const change = parseFloat(paidAmount || 0) - total;
+
+  const filteredProducts = products.filter(product => {
+    const query = productSearch.trim().toLowerCase();
+    if (!query) return true;
+    return (
+      product.name?.toLowerCase().includes(query) ||
+      product.barcode?.toLowerCase().includes(query)
+    );
+  });
 
   return (
     <div className="h-screen flex flex-col" data-testid="pos-page">
@@ -183,6 +223,45 @@ const POS = () => {
               </button>
             </div>
           </form>
+
+          <div className="mb-6">
+            <label className="block text-lg font-semibold mb-2">Ürünler (MongoDB)</label>
+            <input
+              type="text"
+              value={productSearch}
+              onChange={(e) => setProductSearch(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg mb-3"
+              placeholder="Ürün adı veya barkod ile ara..."
+              data-testid="product-search-input"
+            />
+            <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 max-h-64 overflow-y-auto">
+              {filteredProducts.length === 0 ? (
+                <div className="col-span-full text-center text-gray-500 py-6">
+                  Aktif ürün bulunamadı.
+                </div>
+              ) : (
+                filteredProducts.map(product => (
+                  <button
+                    key={product.id}
+                    type="button"
+                    onClick={() => addProductToCart(product)}
+                    disabled={product.stockQuantity <= 0}
+                    data-testid={`pos-product-${product.id}`}
+                    className="text-left bg-white border rounded-lg p-3 hover:border-blue-500 hover:shadow disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    <div className="font-semibold truncate">{product.name}</div>
+                    <div className="text-sm text-gray-500">{product.barcode}</div>
+                    <div className="flex justify-between mt-2 text-sm">
+                      <span className="font-bold text-blue-600">₺{product.salePrice.toFixed(2)}</span>
+                      <span className={product.stockQuantity <= product.minimumStockLevel ? 'text-red-600' : 'text-gray-600'}>
+                        Stok: {product.stockQuantity}
+                      </span>
+                    </div>
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
 
           {/* Cart Items */}
           <div className="bg-white rounded-lg shadow-lg">
@@ -254,10 +333,13 @@ const POS = () => {
                 <option value="">Müşteri Seçin</option>
                 {customers.map(customer => (
                   <option key={customer.id} value={customer.id}>
-                    {customer.fullName}
+                    {customer.fullName}{customer.phone ? ` - ${customer.phone}` : ''}
                   </option>
                 ))}
               </select>
+              {customers.length === 0 && (
+                <p className="text-sm text-gray-500 mt-1">Aktif müşteri bulunamadı.</p>
+              )}
             </div>
 
             <div className="mb-4">

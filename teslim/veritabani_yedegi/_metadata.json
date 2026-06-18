@@ -1,0 +1,14 @@
+{
+  "database": "market_automation",
+  "exportedAt": "2026-06-18T13:50:22.071Z",
+  "collections": {
+    "users": 2,
+    "products": 8,
+    "categories": 3,
+    "customers": 2,
+    "suppliers": 0,
+    "sales": 2,
+    "cash_registers": 0,
+    "purchase_orders": 0
+  }
+}

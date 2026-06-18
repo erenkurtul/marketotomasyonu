@@ -1,0 +1,146 @@
+[
+  {
+    "_id": "6a339f007f645c38b00b62ec",
+    "InvoiceNumber": "INV-20260618073216",
+    "CustomerId": "69f263d16f426de13c7ea8d0",
+    "CashierId": "69f262436f426de13c7ea8c9",
+    "Items": [
+      {
+        "ProductId": "69f262456f426de13c7ea8ce",
+        "ProductName": "Ekmek",
+        "Barcode": "1111111111111",
+        "Quantity": 2,
+        "UnitPrice": {
+          "$numberDecimal": "5.00"
+        },
+        "TaxRate": {
+          "$numberDecimal": "8"
+        },
+        "Subtotal": {
+          "$numberDecimal": "10.00"
+        },
+        "TaxAmount": {
+          "$numberDecimal": "0.8000"
+        },
+        "Total": {
+          "$numberDecimal": "10.8000"
+        }
+      },
+      {
+        "ProductId": "69f262456f426de13c7ea8cf",
+        "ProductName": "Deterjan",
+        "Barcode": "3333333333333",
+        "Quantity": 4,
+        "UnitPrice": {
+          "$numberDecimal": "75.00"
+        },
+        "TaxRate": {
+          "$numberDecimal": "18"
+        },
+        "Subtotal": {
+          "$numberDecimal": "300.00"
+        },
+        "TaxAmount": {
+          "$numberDecimal": "54.0000"
+        },
+        "Total": {
+          "$numberDecimal": "354.0000"
+        }
+      },
+      {
+        "ProductId": "6a339e297f645c38b00b62e8",
+        "ProductName": "cips",
+        "Barcode": "258369",
+        "Quantity": 1,
+        "UnitPrice": {
+          "$numberDecimal": "10"
+        },
+        "TaxRate": {
+          "$numberDecimal": "18"
+        },
+        "Subtotal": {
+          "$numberDecimal": "10"
+        },
+        "TaxAmount": {
+          "$numberDecimal": "1.80"
+        },
+        "Total": {
+          "$numberDecimal": "11.80"
+        }
+      }
+    ],
+    "Subtotal": {
+      "$numberDecimal": "320.00"
+    },
+    "TaxAmount": {
+      "$numberDecimal": "56.6000"
+    },
+    "Total": {
+      "$numberDecimal": "376.6000"
+    },
+    "Discount": {
+      "$numberDecimal": "0"
+    },
+    "PaymentMethod": 0,
+    "PaidAmount": {
+      "$numberDecimal": "399.94"
+    },
+    "ChangeAmount": {
+      "$numberDecimal": "23.3400"
+    },
+    "Notes": "",
+    "IsRefunded": false,
+    "CreatedAt": "2026-06-18T07:32:16.907Z"
+  },
+  {
+    "_id": "6a33c44d1a3397aa0704a307",
+    "InvoiceNumber": "INV-20260618101125",
+    "CustomerId": null,
+    "CashierId": "69f262436f426de13c7ea8c9",
+    "Items": [
+      {
+        "ProductId": "6a33c4061a3397aa0704a306",
+        "ProductName": "hırka",
+        "Barcode": "741258",
+        "Quantity": 3,
+        "UnitPrice": {
+          "$numberDecimal": "30"
+        },
+        "TaxRate": {
+          "$numberDecimal": "18"
+        },
+        "Subtotal": {
+          "$numberDecimal": "90"
+        },
+        "TaxAmount": {
+          "$numberDecimal": "16.20"
+        },
+        "Total": {
+          "$numberDecimal": "106.20"
+        }
+      }
+    ],
+    "Subtotal": {
+      "$numberDecimal": "90"
+    },
+    "TaxAmount": {
+      "$numberDecimal": "16.20"
+    },
+    "Total": {
+      "$numberDecimal": "106.20"
+    },
+    "Discount": {
+      "$numberDecimal": "0"
+    },
+    "PaymentMethod": 1,
+    "PaidAmount": {
+      "$numberDecimal": "106.2"
+    },
+    "ChangeAmount": {
+      "$numberDecimal": "0.00"
+    },
+    "Notes": "",
+    "IsRefunded": false,
+    "CreatedAt": "2026-06-18T10:11:25.566Z"
+  }
+]
